@@ -29,10 +29,10 @@ const handleRequst = async (data) => {
             msg = "You punched *Out*";
             status = "out";
         } else if (userText === "brb") {
-            msg = "Enjoy your *brake*";
-            status = "brake";
+            msg = "Enjoy your *Break*";
+            status = "break";
         } else if (userText === "meeting") {
-            msg = "Ok status setting for *Meeting*";
+            msg = "Ok status updating, *Meeting*";
             status = "meeting";
         } else if (userText === "lunch") {
             msg = "Enjoy your *lunch*";
@@ -88,8 +88,8 @@ const setStatus = async (user, type) => {
     let statusText = type;
     let statusImo = ":white_check_mark:";
 
-    if (type === "brake") {
-        statusText = "Brake";
+    if (type === "break") {
+        statusText = "Break";
         statusImo = ":negative_squared_cross_mark:";
     } else if (type === "meeting") {
         statusText = "Meeting";
