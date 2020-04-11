@@ -2,8 +2,12 @@ const express = require('express');
 var bodyParser = require('body-parser');
 const app = express();
 const requestHelper =  require('./requestHelper');
-const port = 3000
-
+const dotenv = require('dotenv')
+const  fs = require("fs");
+const envConfig = dotenv.parse(fs.readFileSync(`.env.`+process.env.NODE_ENV))
+for (const k in envConfig) {
+  process.env[k] = envConfig[k]
+}
 app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
@@ -31,7 +35,7 @@ app.post('/', (req, res, next) => {
     }
 });
 
-app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
+app.listen(process.env.port, () => console.log(`Example app listening at http://localhost:${process.env.port}`));
 
 //https://slack.com/oauth/authorize?client_id=1054275065493.1070794908512&scope=users.profile%3Awrite&redirect_uri=https%3A%2F%2F5cb7047e.ngrok.io%2F
 

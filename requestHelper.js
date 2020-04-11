@@ -1,13 +1,19 @@
 const { WebClient } = require('@slack/web-api');
 const axios = require('axios');
 
-// Read a token from the environment variables
-const gToken = "xoxb-1054275065493-1072635519008-cYfA4qQol26dS6Jjn13O6aBJ";
-const clientId = "1054275065493.1070794908512";
-const clientSecret = "9f4beb5737e297d11849c123e4e76012";
-const redirect_uri = "https%3A%2F%2Fa1577503.ngrok.io%2Faccess";
-const userAccessUrl = "https://slack.com/oauth/authorize?client_id=" + clientId + "&scope=users.profile%3Awrite&redirect_uri=" + redirect_uri;
+const dotenv = require('dotenv');
+const  fs = require("fs");
+const envConfig = dotenv.parse(fs.readFileSync(`.env.`+process.env.NODE_ENV))
+for (const k in envConfig) {
+  process.env[k] = envConfig[k]
+}
 
+// Read a token from the environment variables
+const gToken = process.env.gToken;
+const clientId = process.env.clientId;
+const clientSecret = process.env.clientSecret;
+const redirect_uri = process.env.redirect_uri;
+const userAccessUrl = "https://slack.com/oauth/authorize?client_id=" + clientId + "&scope=users.profile%3Awrite&redirect_uri=" + redirect_uri;
 
 // Initialize
 const web = new WebClient(gToken);
